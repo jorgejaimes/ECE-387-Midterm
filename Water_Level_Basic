@@ -1,0 +1,31 @@
+int Green = 13;
+int Yellow = 12;
+int Red = 11;
+void setup()
+//Resistors used for LEDs are 1k Ohms
+{
+  Serial.begin(9600);
+  //open serial monitor
+  pinMode(Red, OUTPUT); //most of sensor submerged
+  pinMode(Yellow, OUTPUT); //give or take half of sensor submerged
+  pinMode(Green, OUTPUT);//little or no sensor submerged
+}
+void loop(){
+  int level = analogRead(A0); 
+  Serial.print("Pin Value: ");
+  Serial.println(level);
+  delay(250);
+  if(level<500 && level>=320){
+  digitalWrite(Green,HIGH);
+  digitalWrite(Yellow,LOW);
+  digitalWrite(Red,LOW);
+  }else if(level<320 && level>270){
+  digitalWrite(Green,LOW);
+  digitalWrite(Yellow,HIGH);
+  digitalWrite(Red,LOW);
+  }else{
+    digitalWrite(Green,LOW);
+  digitalWrite(Yellow,LOW);
+  digitalWrite(Red,HIGH);
+  }
+}//end void loop
